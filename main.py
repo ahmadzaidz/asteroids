@@ -7,6 +7,7 @@ from asteroid import *
 from asteroidfield import * 
 from shot import Shot 
 
+
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -33,13 +34,13 @@ def main():
                 return
         screen.fill("black")
         updatable.update(dt)
-        for obj in asteroids:
+        for asteroid in asteroids:
             for shot in shots:
-                if obj.collides_with(shot):
+                if asteroid.collides_with(shot):
                     log_event("asteroid_shot")
                     shot.kill()
-                    obj.kill()
-            if obj.collides_with(player):
+                    asteroid.split()
+            if asteroid.collides_with(player):
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
